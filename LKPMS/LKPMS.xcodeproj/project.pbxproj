@@ -14,9 +14,11 @@
 		B2C371A62463E385007BE702 /* LKPMS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B2C371A42463E385007BE702 /* LKPMS.xcdatamodeld */; };
 		B2C371A82463E388007BE702 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C371A72463E388007BE702 /* Assets.xcassets */; };
 		B2C371AB2463E388007BE702 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2C371A92463E388007BE702 /* LaunchScreen.storyboard */; };
+		ED8487D04C32736B6F943308 /* libPods-LKPMS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5876BCD37B0B8CD66D859E5 /* libPods-LKPMS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E9B699CA8001508308107A7 /* Pods-LKPMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKPMS.debug.xcconfig"; path = "Target Support Files/Pods-LKPMS/Pods-LKPMS.debug.xcconfig"; sourceTree = "<group>"; };
 		B2C371982463E385007BE702 /* LKPMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LKPMS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C3719B2463E385007BE702 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2C3719D2463E385007BE702 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +28,8 @@
 		B2C371A72463E388007BE702 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2C371AA2463E388007BE702 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2C371AC2463E388007BE702 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4DA9B8F0FF0ECCAA9C6C71D /* Pods-LKPMS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKPMS.release.xcconfig"; path = "Target Support Files/Pods-LKPMS/Pods-LKPMS.release.xcconfig"; sourceTree = "<group>"; };
+		F5876BCD37B0B8CD66D859E5 /* libPods-LKPMS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LKPMS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED8487D04C32736B6F943308 /* libPods-LKPMS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		146FF311CC17E86302424DDB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5876BCD37B0B8CD66D859E5 /* libPods-LKPMS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1675709DDF6F2E0F1A0BFC18 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4E9B699CA8001508308107A7 /* Pods-LKPMS.debug.xcconfig */,
+				C4DA9B8F0FF0ECCAA9C6C71D /* Pods-LKPMS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B2C3718F2463E385007BE702 = {
 			isa = PBXGroup;
 			children = (
 				B2C3719A2463E385007BE702 /* LKPMS */,
 				B2C371992463E385007BE702 /* Products */,
+				1675709DDF6F2E0F1A0BFC18 /* Pods */,
+				146FF311CC17E86302424DDB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +102,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2C371AF2463E388007BE702 /* Build configuration list for PBXNativeTarget "LKPMS" */;
 			buildPhases = (
+				0A64E29CB648C16045D4A38C /* [CP] Check Pods Manifest.lock */,
 				B2C371942463E385007BE702 /* Sources */,
 				B2C371952463E385007BE702 /* Frameworks */,
 				B2C371962463E385007BE702 /* Resources */,
@@ -135,6 +161,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A64E29CB648C16045D4A38C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LKPMS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B2C371942463E385007BE702 /* Sources */ = {
@@ -286,6 +337,7 @@
 		};
 		B2C371B02463E388007BE702 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E9B699CA8001508308107A7 /* Pods-LKPMS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -304,6 +356,7 @@
 		};
 		B2C371B12463E388007BE702 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4DA9B8F0FF0ECCAA9C6C71D /* Pods-LKPMS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

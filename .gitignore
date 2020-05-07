@@ -3,4 +3,10 @@ ProjectManagmentSystem/Pods/
 ProjectManagmentSystem/.DS_Store
 *.xcuserstate
 *.xcworkspacedata
-LKPMS/LKPMS.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+
+IDEWorkspaceChecks.plist
+LKPMS/Podfile.lock
+LKPMS/Pods
+xcschememanagement.plist
+.DS_Store

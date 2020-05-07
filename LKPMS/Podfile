@@ -4,8 +4,7 @@
 # use_frameworks!
 inhibit_all_warnings!
 
-target 'ProjectManagmentSystem' do
-    pod 'Parse'
+target 'LKPMS' do
     pod 'MBProgressHUD'
 end
 
