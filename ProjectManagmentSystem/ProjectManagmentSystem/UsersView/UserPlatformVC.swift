@@ -59,7 +59,7 @@ class UserPlatformVC: UIViewController,NSFetchedResultsControllerDelegate,UITabl
     }
     @IBAction func btnAddPlatform(sender:UIButton){
 
-        if (txtNewPlatform.text?.characters.count)! > 0 && DBUpdateManager.countEntityWith(entityName: "Platform", keyValues: ["lName" : txtNewPlatform.text as AnyObject], moc: DatabaseManager.sharedInstance().managedObjectContext) == 0 {
+        if (txtNewPlatform.text?.count)! > 0 && DBUpdateManager.countEntityWith(entityName: "Platform", keyValues: ["lName" : txtNewPlatform.text as AnyObject], moc: DatabaseManager.sharedInstance().managedObjectContext) == 0 {
             MBProgressHUD.showAdded(to: self.view, animated: true)
 //            let query:PFQuery = PFQuery.init(className: "PMSPlatform")
 //            query.limit = 1
@@ -131,7 +131,7 @@ class UserPlatformVC: UIViewController,NSFetchedResultsControllerDelegate,UITabl
             selectedPlatform?.removeAll()
         }
         if (selectedPlatform?.contains(platformInfo))! {
-            selectedPlatform?.remove(at: (selectedPlatform?.index(of:platformInfo))!)
+            selectedPlatform?.remove(at: (selectedPlatform?.firstIndex(of:platformInfo))!)
         }
         else{
             selectedPlatform?.append(platformInfo)
@@ -152,7 +152,7 @@ class UserPlatformVC: UIViewController,NSFetchedResultsControllerDelegate,UITabl
         return false
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
             let moc:NSManagedObjectContext = DBUpdateManager.createPrivateMOC(parentMOC: self.managedObjectContext)
@@ -222,6 +222,8 @@ class UserPlatformVC: UIViewController,NSFetchedResultsControllerDelegate,UITabl
                 self.tblPlatformList?.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
+        @unknown default:
+            fatalError()
         }
     }
     private func controllerDidChangeContent(controller: NSFetchedResultsController<NSFetchRequestResult>) {

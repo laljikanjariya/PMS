@@ -18,7 +18,7 @@ class ServerSettingVC: UIViewController {
         txtServerIP.text = "192.168.1.104"
         // Do any additional setup after loading the view.
     }
-    func pushLoginView() {
+    @objc func pushLoginView() {
         MBProgressHUD.hide(for: self.view, animated: true)
         NotificationCenter.default.removeObserver(self)
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -31,14 +31,14 @@ class ServerSettingVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func btnConfugureParse(_ sender: UIButton) {
-        if (txtServerIP.text?.characters.count)! > 0 && (txtServerPort.text?.characters.count)! > 0 {
+        if (txtServerIP.text?.count)! > 0 && (txtServerPort.text?.count)! > 0 {
             SnycManager.sharedInstance().connectDatabase(serverIP: txtServerIP.text!, serverPort: txtServerPort.text!)
             sender.isHidden = true
         }
-        if (txtServerIP.text?.characters.count)! == 0{
+        if (txtServerIP.text?.count)! == 0{
             txtServerIP.backgroundColor = UIColor.red
         }
-        if (txtServerPort.text?.characters.count)! == 0{
+        if (txtServerPort.text?.count)! == 0{
             txtServerPort.backgroundColor = UIColor.red
         }
     }

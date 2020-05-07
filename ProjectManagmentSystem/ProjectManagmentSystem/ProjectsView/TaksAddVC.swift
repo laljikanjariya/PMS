@@ -22,8 +22,8 @@ class TaksAddVC: UIViewController,UserListDelegate {
     @IBOutlet weak var btnParticipanceTo: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        objTask = DBUpdateManager.insertObject(entityName: "Task", moc: managedObjectContext) as! Task
-        objTask.tStartTime = NSDate()
+        objTask = DBUpdateManager.insertObject(entityName: "Task", moc: managedObjectContext) as? Task
+        objTask.tStartTime = Date()
         objTask.tStatus = 1
         updateUI()
         // Do any additional setup after loading the view.
@@ -37,7 +37,7 @@ class TaksAddVC: UIViewController,UserListDelegate {
     @IBAction func btnSaveTapped(_ sender: UIButton) {
         objTask.tName = txtTName.text
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        objTask.tStartTime = NSDate()
+        objTask.tStartTime = Date()
         let objParse:PFObject! = PFObject.init(className: "PMSTask")
 
         objParse["tName"] = objTask.tName
@@ -117,8 +117,8 @@ class TaksAddVC: UIViewController,UserListDelegate {
         txtTName.text = objTask.tName
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "MM/dd/yyyy"
-        lblDate?.text = dayTimePeriodFormatter.string(from: objTask.tStartTime as! Date)
-        if (objTask.assignTo != nil) && (objTask.assignTo?.uName?.characters.count)! > 0 {
+        lblDate?.text = dayTimePeriodFormatter.string(from: objTask.tStartTime!)
+        if (objTask.assignTo != nil) && (objTask.assignTo?.uName?.count)! > 0 {
             btnAssignTo.setTitle(objTask.assignTo?.uName, for: .normal)
         }
         else{
@@ -128,7 +128,7 @@ class TaksAddVC: UIViewController,UserListDelegate {
         for user:User in (objTask?.participence?.allObjects as?[User])! {
             strUserName.append(user.uName! + ", ")
         }
-        if strUserName.characters.count == 0 {
+        if strUserName.count == 0 {
             strUserName = "Select your platform"
         }
         btnParticipanceTo.setTitle(strUserName, for: .normal)

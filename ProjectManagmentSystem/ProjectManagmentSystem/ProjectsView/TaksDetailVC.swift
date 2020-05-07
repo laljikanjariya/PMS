@@ -15,7 +15,7 @@ class CommentListCell: UITableViewCell {
     func configureWithComment(commentInfo : Comment)  {
         self.lblComment?.text = commentInfo.comment
         self.lblUser?.text = commentInfo.user?.uName
-        self.lblTime?.text = UtilityManager.getDurationFrom(fromDate: commentInfo.time as! Date, toDate: Date())
+        self.lblTime?.text = UtilityManager.getDurationFrom(fromDate: commentInfo.time!, toDate: Date())
     }
     
     override func awakeFromNib() {
@@ -39,7 +39,7 @@ class TaksDetailVC: UIViewController,NSFetchedResultsControllerDelegate,UITableV
         super.viewDidLoad()
         managedObjectContext = DatabaseManager.sharedInstance().managedObjectContext
         taskDetailHeaderView.updateUIWithTask(taskInfo: objTask)
-        tblComment.rowHeight = UITableViewAutomaticDimension
+        tblComment.rowHeight = UITableView.automaticDimension
         tblComment.estimatedRowHeight = 50
         // Do any additional setup after loading the view.
     }
@@ -144,6 +144,8 @@ class TaksDetailVC: UIViewController,NSFetchedResultsControllerDelegate,UITableV
                 self.tblComment?.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
+        @unknown default:
+            fatalError()
         }
     }
     private func controllerDidChangeContent(controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -162,8 +164,8 @@ class TaskDetailHeaderView: UIView {
         txtTName.text = taskInfo.tName
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "MM/dd/yyyy"
-        lblDate?.text = dayTimePeriodFormatter.string(from: taskInfo.tStartTime as! Date)
-        if (taskInfo.assignTo != nil) && (taskInfo.assignTo?.uName?.characters.count)! > 0 {
+        lblDate?.text = dayTimePeriodFormatter.string(from: taskInfo.tStartTime!)
+        if (taskInfo.assignTo != nil) && (taskInfo.assignTo?.uName?.count)! > 0 {
             btnAssign.setTitle(taskInfo.assignTo?.uName, for: .normal)
         }
         else{

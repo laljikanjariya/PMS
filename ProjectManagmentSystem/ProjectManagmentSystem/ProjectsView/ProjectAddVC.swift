@@ -21,8 +21,8 @@ class ProjectAddVC: UIViewController,UserPlatformDelegate, UserListDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         managedObjectContext = DBUpdateManager.createPrivateMOC(parentMOC: DatabaseManager.sharedInstance().managedObjectContext)
-        objProject = DBUpdateManager.insertObject(entityName: "Project", moc: managedObjectContext) as! Project
-        objProject.pStartDate = NSDate()
+        objProject = (DBUpdateManager.insertObject(entityName: "Project", moc: managedObjectContext) as! Project)
+        objProject.pStartDate = Date()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,7 +36,7 @@ class ProjectAddVC: UIViewController,UserPlatformDelegate, UserListDelegate {
         MBProgressHUD.showAdded(to: self.view, animated: true)
 
         if objProject.pStartDate == nil {
-            objProject.pStartDate = NSDate()
+            objProject.pStartDate = Date()
         }
         let objParse:PFObject! = PFObject.init(className: "PMSProject")
 
@@ -98,7 +98,7 @@ class ProjectAddVC: UIViewController,UserPlatformDelegate, UserListDelegate {
         txtPName.text = objProject.pName
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "MM/dd/yyyy"
-        lblTime?.text = dayTimePeriodFormatter.string(from: objProject.pStartDate as! Date)
+        lblTime?.text = dayTimePeriodFormatter.string(from: objProject.pStartDate!)
         if objProject.platform != nil {
             btnPlatform.setTitle(objProject.platform?.lName, for: .normal)
             btnPlatform.isUserInteractionEnabled = false
@@ -107,7 +107,7 @@ class ProjectAddVC: UIViewController,UserPlatformDelegate, UserListDelegate {
             btnPlatform.setTitle("Select Platform", for: .normal)
             btnPlatform.isUserInteractionEnabled = true
         }
-        if (objProject.assignTo != nil) && (objProject.assignTo?.uName?.characters.count)! > 0 {
+        if (objProject.assignTo != nil) && (objProject.assignTo?.uName?.count)! > 0 {
             btnAssignTo.setTitle(objProject.assignTo?.uName, for: .normal)
         }
         else{

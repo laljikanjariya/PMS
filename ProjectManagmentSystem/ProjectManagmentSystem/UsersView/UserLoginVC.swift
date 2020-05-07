@@ -23,11 +23,11 @@ class UserLoginVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func btnLoginTapped(_ sender: UIButton) {
-        if (txtPassword.text?.characters.count)! > 0 && (txtPassword.text?.characters.count)! > 0 {
+        if (txtPassword.text?.count)! > 0 && (txtPassword.text?.count)! > 0 {
             let keyValues : [String : AnyObject] = ["uMobile":txtMobileNo.text as AnyObject,"uPassword":txtPassword.text as AnyObject]
             let obj = DBUpdateManager.fetchEntityWith(entityName: "User", keyValues: keyValues , moc: DatabaseManager.sharedInstance().managedObjectContext)
             if (obj?.count)! > 0 {
-                DatabaseManager.sharedInstance().currentUser = obj?.first as! User
+                DatabaseManager.sharedInstance().currentUser = obj?.first as? User
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let projectDetailVC : ProjectListVC = storyBoard.instantiateViewController(withIdentifier: "ProjectListVC_sid") as! ProjectListVC
                 self.navigationController?.pushViewController(projectDetailVC, animated: true)

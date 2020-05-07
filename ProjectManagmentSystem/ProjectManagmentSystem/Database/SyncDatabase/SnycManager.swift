@@ -58,28 +58,28 @@ class SnycManager: NSObject {
         NotificationCenter.default.addObserver(SnycManager.sharedInstance(),selector: #selector(SnycManager.snycPlatformComlited(notification:)),name: NSNotification.Name(rawValue: "platformSnycNotificationKey"),object: nil)
         SnycManager.forceUpdatePlatformClass(isSendNotification: true)
     }
-    func snycPlatformComlited(notification: Notification){
+    @objc func snycPlatformComlited(notification: Notification){
         NotificationCenter.default.removeObserver(self)
 
         NotificationCenter.default.addObserver(self,selector: #selector(snycUserComlited),name: NSNotification.Name(rawValue: SnycManager.userSnycNotification),object: nil)
         SnycManager.forceUpdateUserClass(isSendNotification: true)
     }
-    func snycUserComlited(){
+    @objc func snycUserComlited(){
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self,selector: #selector(snycProjectComlited),name: NSNotification.Name(rawValue: SnycManager.projectSnycNotification),object: nil)
         SnycManager.forceUpdateProjectClass(isSendNotification: true)
     }
-    func snycProjectComlited(){
+    @objc func snycProjectComlited(){
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self,selector: #selector(snycTaskComlited),name: NSNotification.Name(rawValue: SnycManager.taskSnycNotification),object: nil)
         SnycManager.forceUpdateTaskClass(isSendNotification: true)
     }
-    func snycTaskComlited(){
+    @objc func snycTaskComlited(){
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.addObserver(self,selector: #selector(snycCommentComlited),name: NSNotification.Name(rawValue: SnycManager.commentSnycNotification),object: nil)
         SnycManager.forceUpdateCommentClass(isSendNotification: true)
     }
-    func snycCommentComlited(){
+    @objc func snycCommentComlited(){
         NotificationCenter.default.removeObserver(self)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: SnycManager.databaseSnycNotification), object: nil)
     }
@@ -90,7 +90,7 @@ class SnycManager: NSObject {
         SnycManager.sharedInstance().updateProjectClass(isSendNotification: isSendNotification)
     }
     // MARK: - Project Class -
-    func updateProjectClass(isSendNotification : Bool) {
+    @objc func updateProjectClass(isSendNotification : Bool) {
         if timerProject == nil {
             timerProject = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.updateProjectClass), userInfo: nil, repeats: true);
         }
@@ -139,7 +139,7 @@ class SnycManager: NSObject {
             project.uID = Int64((pfProject.object(forKey: "uID") as! NSNumber).doubleValue)
             project.objectId = pfProject.objectId
             project.pName = pfProject.value(forKey: "pName") as! String?
-            project.pStartDate = pfProject.createdAt as NSDate?
+            project.pStartDate = pfProject.createdAt
             let userAssignTo:PFObject = pfProject.object(forKey: "assignTo") as! PFObject
             let user:User? = self.getObject(withClassName: "User", fromUID: userAssignTo.value(forKey: "uID") as AnyObject, isCreate: false, moc: moc) as? User
             if user != nil {
@@ -159,7 +159,7 @@ class SnycManager: NSObject {
         SnycManager.sharedInstance().timerTask = nil
         SnycManager.sharedInstance().updateTaskClass(isSendNotification : isSendNotification)
     }
-    func updateTaskClass(isSendNotification : Bool) {
+    @objc func updateTaskClass(isSendNotification : Bool) {
         if timerTask == nil {
             timerTask = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.updateTaskClass(isSendNotification:)), userInfo: false, repeats: true);
         }
@@ -229,7 +229,7 @@ class SnycManager: NSObject {
         SnycManager.sharedInstance().timerComment = nil
         SnycManager.sharedInstance().snycCommentTable(isSendNotification : isSendNotification)
     }
-    func snycCommentTable(isSendNotification : Bool){
+    @objc func snycCommentTable(isSendNotification : Bool){
         if timerComment == nil {
             timerComment = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.snycCommentTable(isSendNotification:)), userInfo: false, repeats: true);
         }
@@ -285,7 +285,7 @@ class SnycManager: NSObject {
         if taskCD != nil {
             comment.task = taskCD;
         }
-        comment.time = pfComment.createdAt as NSDate?
+        comment.time = pfComment.createdAt
     }
     
     // MARK: - User Class -

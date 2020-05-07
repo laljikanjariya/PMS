@@ -103,7 +103,7 @@ class UserListVC: UIViewController,NSFetchedResultsControllerDelegate,UITableVie
             selectedUser?.removeAll()
         }
         if (selectedUser?.contains(userInfo))! {
-            selectedUser?.remove(at: (selectedUser?.index(of:userInfo))!)
+            selectedUser?.remove(at: (selectedUser?.firstIndex(of:userInfo))!)
         }
         else{
             selectedUser?.append(userInfo)
@@ -168,6 +168,8 @@ class UserListVC: UIViewController,NSFetchedResultsControllerDelegate,UITableVie
                 self.tblUserList?.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
+        @unknown default:
+            fatalError()
         }
     }
     private func controllerDidChangeContent(controller: NSFetchedResultsController<NSFetchRequestResult>) {

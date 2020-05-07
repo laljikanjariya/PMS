@@ -212,6 +212,8 @@ class ProjectDetailVC: UIViewController, NSFetchedResultsControllerDelegate,UITa
                 self.tblProjectDetail?.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
+        @unknown default:
+            fatalError()
         }
     }
     private func controllerDidChangeContent(controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -231,7 +233,7 @@ class ProjectDetailHeaderView: UIView {
         txtPName.isUserInteractionEnabled = false
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "MM/dd/yyyy"
-        lblDate?.text = dayTimePeriodFormatter.string(from: projectInfo.pStartDate as! Date)
+        lblDate?.text = dayTimePeriodFormatter.string(from: projectInfo.pStartDate!)
         if projectInfo.platform != nil {
             btnPlatform.setTitle(projectInfo.platform?.lName, for: .normal)
             btnPlatform.isUserInteractionEnabled = false
@@ -240,7 +242,7 @@ class ProjectDetailHeaderView: UIView {
             btnPlatform.setTitle("Select Platform", for: .normal)
             btnPlatform.isUserInteractionEnabled = true
         }
-        if (projectInfo.assignTo != nil) && (projectInfo.assignTo?.uName?.characters.count)! > 0 {
+        if (projectInfo.assignTo != nil) && (projectInfo.assignTo?.uName?.count)! > 0 {
             btnAssign.setTitle(projectInfo.assignTo?.uName, for: .normal)
         }
         else{

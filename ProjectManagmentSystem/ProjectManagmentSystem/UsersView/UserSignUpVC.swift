@@ -40,7 +40,7 @@ class UserSignUpVC: UIViewController,UserPlatformDelegate,UIImagePickerControlle
         for platforn:Platform in (objUser?.platform?.allObjects as?[Platform])! {
             strPlatform.append(platforn.lName! + ", ")
         }
-        if strPlatform.characters.count == 0 {
+        if strPlatform.count == 0 {
             strPlatform = "Select your platform"
         }
         lblUserPlatform.text = strPlatform
@@ -57,7 +57,7 @@ class UserSignUpVC: UIViewController,UserPlatformDelegate,UIImagePickerControlle
         present(imagePicker, animated: true, completion: nil)
     }
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
             btnImage.setImage(pickedImage, for: .normal)
             selectedImage = pickedImage
         }
@@ -104,15 +104,15 @@ class UserSignUpVC: UIViewController,UserPlatformDelegate,UIImagePickerControlle
         txtUserConfirmPassword.backgroundColor = UIColor.green
         lblUserPlatform.backgroundColor = UIColor.green
         var isSave:Bool = true
-        if (txtUserName.text?.characters.count)! == 0 {
+        if (txtUserName.text?.count)! == 0 {
             txtUserName.backgroundColor = UIColor.red
             isSave = false
         }
-        if (txtUserMobile.text?.characters.count)! == 0 {
+        if (txtUserMobile.text?.count)! == 0 {
             txtUserMobile.backgroundColor = UIColor.red
             isSave = false
         }
-        if (txtUserPassword.text?.characters.count)! == 0 {
+        if (txtUserPassword.text?.count)! == 0 {
             txtUserPassword.backgroundColor = UIColor.red
             txtUserConfirmPassword.backgroundColor = UIColor.red
             isSave = false
@@ -140,7 +140,7 @@ class UserSignUpVC: UIViewController,UserPlatformDelegate,UIImagePickerControlle
             newPlatform["isDeleted"] = false
             if selectedImage != nil {
 
-                let imageData = UIImagePNGRepresentation(selectedImage!)
+                let imageData = selectedImage!.pngData()
                 let imageFile = PFFile(name:"image.png", data:imageData!)
                 newPlatform["profileImage"] = imageFile
             }

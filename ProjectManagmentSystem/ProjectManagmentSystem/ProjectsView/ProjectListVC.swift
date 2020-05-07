@@ -14,7 +14,7 @@ class ProjectListCell: UITableViewCell {
     @IBOutlet var lblTime : UILabel?
     func configureWithProject(projectInfo : Project)  {
         self.lblPName?.text = projectInfo.pName
-        self.lblTime?.text = UtilityManager.getDurationFrom(fromDate: projectInfo.pStartDate as! Date, toDate: Date())
+        self.lblTime?.text = UtilityManager.getDurationFrom(fromDate: projectInfo.pStartDate!, toDate: Date())
     }
     
     override func awakeFromNib() {
@@ -78,7 +78,7 @@ class ProjectListVC: UIViewController,NSFetchedResultsControllerDelegate,UITable
         tableView.deselectRow(at: indexPath, animated: true)
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let projectDetailVC : ProjectDetailVC = storyBoard.instantiateViewController(withIdentifier: "ProjectDetailVC_sid") as! ProjectDetailVC
-        projectDetailVC.objProject = fetchedResultsController.object(at: indexPath) as! Project
+        projectDetailVC.objProject = fetchedResultsController.object(at: indexPath) as? Project
         projectDetailVC.managedObjectContext = self.managedObjectContext
         self.navigationController?.pushViewController(projectDetailVC, animated: true)
 
@@ -102,7 +102,7 @@ class ProjectListVC: UIViewController,NSFetchedResultsControllerDelegate,UITable
 //        
 //        return [deleteAction, editAction]
 //    }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
             let objProject :Project = fetchedResultsController.object(at: indexPath as IndexPath) as! Project
@@ -182,6 +182,8 @@ class ProjectListVC: UIViewController,NSFetchedResultsControllerDelegate,UITable
                 self.tblProjectList?.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
+        @unknown default:
+            fatalError()
         }
     }
     private func controllerDidChangeContent(controller: NSFetchedResultsController<NSFetchRequestResult>) {
